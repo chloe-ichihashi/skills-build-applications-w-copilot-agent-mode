@@ -7,7 +7,7 @@ import { LeaderboardEntryModel } from '../models/LeaderboardEntry.js';
 import { WorkoutModel } from '../models/Workout.js';
 
 /**
- * Seed command description:
+ * Seed the octofit_db database with test data.
  * Run this script to populate the octofit_db database with sample users, teams, activities,
  * leaderboard entries, and workouts for local development.
  */
