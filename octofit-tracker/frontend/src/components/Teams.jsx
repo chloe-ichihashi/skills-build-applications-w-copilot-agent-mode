@@ -1,14 +1,16 @@
 import { useEffect, useState } from 'react';
-import { getApiBaseUrl } from '../utils/api.js';
 
 function Teams() {
   const [teams, setTeams] = useState([]);
   const [error, setError] = useState('');
+  const apiUrl = import.meta.env.VITE_CODESPACE_NAME
+    ? `https://${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev/api/teams/`
+    : 'http://localhost:8000/api/teams/';
 
   useEffect(() => {
     const loadTeams = async () => {
       try {
-        const response = await fetch(`${getApiBaseUrl()}/api/teams/`);
+        const response = await fetch(apiUrl);
         if (!response.ok) {
           throw new Error('Unable to load teams');
         }
@@ -21,7 +23,7 @@ function Teams() {
     };
 
     loadTeams();
-  }, []);
+  }, [apiUrl]);
 
   return (
     <section className="card shadow-sm border-0">

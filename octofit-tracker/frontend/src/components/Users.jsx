@@ -1,14 +1,16 @@
 import { useEffect, useState } from 'react';
-import { getApiBaseUrl } from '../utils/api.js';
 
 function Users() {
   const [users, setUsers] = useState([]);
   const [error, setError] = useState('');
+  const apiUrl = import.meta.env.VITE_CODESPACE_NAME
+    ? `https://${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev/api/users/`
+    : 'http://localhost:8000/api/users/';
 
   useEffect(() => {
     const loadUsers = async () => {
       try {
-        const response = await fetch(`${getApiBaseUrl()}/api/users/`);
+        const response = await fetch(apiUrl);
         if (!response.ok) {
           throw new Error('Unable to load users');
         }
@@ -21,7 +23,7 @@ function Users() {
     };
 
     loadUsers();
-  }, []);
+  }, [apiUrl]);
 
   return (
     <section className="card shadow-sm border-0">

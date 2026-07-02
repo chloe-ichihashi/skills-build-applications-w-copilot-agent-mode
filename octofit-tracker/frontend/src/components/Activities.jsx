@@ -1,14 +1,16 @@
 import { useEffect, useState } from 'react';
-import { getApiBaseUrl } from '../utils/api.js';
 
 function Activities() {
   const [activities, setActivities] = useState([]);
   const [error, setError] = useState('');
+  const apiUrl = import.meta.env.VITE_CODESPACE_NAME
+    ? `https://${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev/api/activities/`
+    : 'http://localhost:8000/api/activities/';
 
   useEffect(() => {
     const loadActivities = async () => {
       try {
-        const response = await fetch(`${getApiBaseUrl()}/api/activities/`);
+        const response = await fetch(apiUrl);
         if (!response.ok) {
           throw new Error('Unable to load activities');
         }
@@ -21,7 +23,7 @@ function Activities() {
     };
 
     loadActivities();
-  }, []);
+  }, [apiUrl]);
 
   return (
     <section className="card shadow-sm border-0">

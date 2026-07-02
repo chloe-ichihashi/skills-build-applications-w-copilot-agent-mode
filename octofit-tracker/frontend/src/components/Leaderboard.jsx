@@ -1,14 +1,16 @@
 import { useEffect, useState } from 'react';
-import { getApiBaseUrl } from '../utils/api.js';
 
 function Leaderboard() {
   const [leaderboard, setLeaderboard] = useState([]);
   const [error, setError] = useState('');
+  const apiUrl = import.meta.env.VITE_CODESPACE_NAME
+    ? `https://${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev/api/leaderboard/`
+    : 'http://localhost:8000/api/leaderboard/';
 
   useEffect(() => {
     const loadLeaderboard = async () => {
       try {
-        const response = await fetch(`${getApiBaseUrl()}/api/leaderboard/`);
+        const response = await fetch(apiUrl);
         if (!response.ok) {
           throw new Error('Unable to load leaderboard');
         }
@@ -21,7 +23,7 @@ function Leaderboard() {
     };
 
     loadLeaderboard();
-  }, []);
+  }, [apiUrl]);
 
   return (
     <section className="card shadow-sm border-0">
