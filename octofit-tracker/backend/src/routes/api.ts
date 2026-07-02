@@ -6,9 +6,13 @@ import { LeaderboardEntryModel } from '../models/LeaderboardEntry.js';
 import { WorkoutModel } from '../models/Workout.js';
 
 const router = Router();
+const codespaceName = process.env.CODESPACE_NAME;
+const baseUrl = codespaceName
+  ? `https://${codespaceName}-8000.app.github.dev`
+  : 'http://localhost:8000';
 
 router.get('/health', (_req, res) => {
-  res.json({ status: 'ok', service: 'octofit-backend' });
+  res.json({ status: 'ok', service: 'octofit-backend', baseUrl });
 });
 
 router.get('/users', async (_req, res) => {
