@@ -1,0 +1,12 @@
+.app-shell {
+  padding: 2rem 1rem 3rem;
+}
+
+.hero-card {
+  background: linear-gradient(135deg, #f8fbff 0%, #eef4ff 100%);
+  border: 1px solid #dce7ff;
+}
+
+.card {
+  border-radius: 1rem;
+}
